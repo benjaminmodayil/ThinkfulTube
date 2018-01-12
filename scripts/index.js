@@ -15,7 +15,7 @@ $("form").on("click", "button", function(e) {
   $("#tt-search").val("") 
   getDataFromApi(searchTerm, function(data) {
       token = data;
-    
+
     data.items.forEach(item => {
       youtubeThumbnails.push(item);
     });
@@ -42,6 +42,7 @@ function getDataFromApi(searchTerm, callback) {
 let youtubeThumbnails = [];
 
 function renderTemplate() {
+  $('h2').remove();
   $('ul').html('');
   let dump = [];
   let title = [];
@@ -49,21 +50,12 @@ function renderTemplate() {
   dump.forEach(word => {
      let oldWord = word.toLowerCase();
      let firstLetter = word.charAt(0).toUpperCase()
-     
+
      title.push(firstLetter + oldWord.slice(1));
   });
-  
-  title = title.join(' ');
-  
-  $('main').prepend(
-    `
-     <h2>Related to
-      <span class="search-term f-style--italic color-red">${title}</span>
-    </h2>
-    `);
 
-  $('main').prop('hidden', false);
-  
+  title = title.join(' ');
+
   youtubeThumbnails.map(item => {
     $("ul").append(
       `
@@ -74,7 +66,7 @@ function renderTemplate() {
           <div class="card__details">
             <h3>${item.snippet.title}</h3>
             <a class="channel-name" href="${youtube_ChannelURL + item.snippet.channelId}">
-              ${item.snippet.channelTitle}
+            <span class="screenreader-only">Channel:</span>${item.snippet.channelTitle}
             </a>
           </div>
 
@@ -83,9 +75,21 @@ function renderTemplate() {
       </li>
       `
     );
-    
   });
+  let numOfResults;
+  let listElements = $('li');
 
+  $('main').prepend(
+    `
+    <h2>Related to
+      <span class="search-term f-style--italic color-red">${title}</span>
+    </h2>
+
+    <p class="screenreader-only">There are ${listElements.length} results.</p>
+    `);
+
+  $('main').prop('hidden', false);
+  
   iframeHandler();
 }
 
@@ -98,8 +102,9 @@ function iframeHandler() {
       .replace(youtube_VideoURL, "");
     $('body').addClass('overflow--hidden');
     $('body').append(`<div class="container-modal">
-<div class="overlay"></div><div class="modal"></div></div>`)
+<div class="overlay"></div><div class="modal" aria-expanded=“true”></div></div>`)
     $(".modal").append(`
+      <p class="screenreader-only">Click anywhere outside the video or use the ESC key to close.</p>
       <iframe width="854" height="480" src="https://www.youtube.com/embed/${snippetURL}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 `);
   });
