@@ -1,8 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i");
 
-* body{
+* html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.screenreader-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .--hidden {
@@ -116,7 +125,7 @@ ul {
 }
 
 .color-grey {
-  color: #f0f0f0;
+  color: #ffffff;
 }
 
 .color-dark-grey {
@@ -128,7 +137,7 @@ ul {
 }
 
 .bg-color-grey {
-  background-color: #f0f0f0;
+  background-color: #ffffff;
 }
 
 .text-center {
@@ -168,7 +177,7 @@ ul {
 }
 
 body {
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   font-family: "Roboto", sans-serif;
 }
 

@@ -55,21 +55,22 @@ function renderTemplate() {
   
   title = title.join(' ');
   
-  $('ul').prepend(
+  $('main').prepend(
     `
      <h2>Related to
       <span class="search-term f-style--italic color-red">${title}</span>
     </h2>
     `);
+
+  $('main').prop('hidden', false);
   
   youtubeThumbnails.map(item => {
-    console.log(item)
     $("ul").append(
       `
         <li class="card --is-displaying">
         <div class="card__container">
           <a href=${youtube_VideoURL + item.id.videoId} class="card__thumbnail-link thumbnail">
-            <img src=${item.snippet.thumbnails.medium.url} alt=""></a>
+            <span class="screenreader-only">${item.snippet.title}</span><img src=${item.snippet.thumbnails.medium.url} alt=""></a>
           <div class="card__details">
             <h3>${item.snippet.title}</h3>
             <a class="channel-name" href="${youtube_ChannelURL + item.snippet.channelId}">
