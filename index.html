@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>repl.it</title>
+  <link href="styles/index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="wrapper">
+  <header class="wrapper-big margin-center">
+    <h1 class="color-red text-center">YouTube Data
+      <abbr title="Application Programming Interface">API</abbr>
+    </h1>
+    <!-- check ally form -->
+    <form class="margin-center display-block" action="post">
+      <label class="display-block f-weight--bold color-red" for="tt-search">Search Query</label>
+      <input type="text" id="tt-search" name="tt-search" placeholder="search for a video" required autocomplete="off">
+      <button class="btn bg-color-red text-center color-white tt-submit">search</button>
+    </form>
+  </header>
+
+  <main class="first-result wrapper-big margin-center" role="main">
+    <ul>
+    </ul>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <script src="scripts/index.js"></script>
+</body>
+</html>
